@@ -1,0 +1,77 @@
+/* Night Operations style note: this file owns the dark ink canvas, Recovery Cobalt signal palette, mono telemetry type, and restrained motion language. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.7rem;
+  --background: #05080F;
+  --foreground: #E8EDF5;
+  --card: #0A1320;
+  --card-foreground: #E8EDF5;
+  --popover: #0C1725;
+  --popover-foreground: #E8EDF5;
+  --primary: #2D6BFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #0F1B2B;
+  --secondary-foreground: #B9C6D7;
+  --muted: #101B2A;
+  --muted-foreground: #718198;
+  --accent: #162A47;
+  --accent-foreground: #DCE8F8;
+  --destructive: #F36B5F;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(255, 255, 255, .1);
+  --input: rgba(255, 255, 255, .1);
+  --ring: #2D6BFF;
+}
+
+* { box-sizing: border-box; }
+html { background: #05080F; scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #05080F; color: #E8EDF5; font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #6EA8FF; outline-offset: 2px; }
+::selection { background: rgba(45, 107, 255, .35); color: white; }
+
+@keyframes reveal-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes signal-pulse { 0%, 100% { opacity: .55; transform: scale(.92); } 50% { opacity: 1; transform: scale(1); } }
+.reveal-up { animation: reveal-up .45s cubic-bezier(.23, 1, .32, 1) both; }
+.signal-pulse { animation: signal-pulse 2.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+/* Keep native dark controls legible against the actual visible background. */
+select option { background: #0C1725; color: #E8EDF5; }
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-track { background: #07101B; }
+::-webkit-scrollbar-thumb { background: rgba(132, 155, 190, .3); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(132, 155, 190, .5); }
