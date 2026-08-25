@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: recoverai-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./recoverai.db
+      - DEBUG=false
+      - ALLOWED_ORIGINS=["http://localhost:5173","http://localhost:3000","http://localhost:80"]
+      # Secrets must be provided via .env file or environment - never hardcoded
+      # Create a .env file in the project root with real values:
+      # NGC_API_KEY=...
+      # RAZORPAY_KEY_ID=...
+      # RAZORPAY_KEY_SECRET=...
+      # INTERNAL_API_KEY=...
+    env_file:
+      - .env
+    volumes:
+      - backend_data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: recoverai-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  backend_data:
